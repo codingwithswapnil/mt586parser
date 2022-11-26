@@ -5,7 +5,8 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
 	selector: 'app-file-upload',
-	templateUrl: './file-upload.component.html'
+	templateUrl: './file-upload.component.html',
+	styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
 	// Variable to store shortLink from api response
@@ -28,7 +29,7 @@ export class FileUploadComponent implements OnInit {
 
 		this.uploadDisabled = false;
 	}
-	
+
 	openDialog() {
 		this.parsedData = {
 			bic: "Ava-Bioggio",
@@ -70,14 +71,14 @@ export class FileUploadComponent implements OnInit {
 
 		this.openDialog();
 
-		this.loading = false; 
+		this.loading = false;
 
 		// this.fileUploadService.upload(this.file).subscribe(
 		// 	(event: any) => {
 		// 		console.log(event, 'event')
 		// 		if (typeof (event) === 'object') {
 		// 			this.shortLink = event.link;
-		// 			this.loading = false; 
+		// 			this.loading = false;
 		// 		}
 
 		// 		this.openDialog();

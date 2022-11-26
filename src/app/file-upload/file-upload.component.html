@@ -1,9 +1,13 @@
-<div class="text-center">
-	<input class="form-control" type="file"(change)="onChange($event)">
+<div class="text-center upload-section">
+	<span class="upload-file-wrapper">
+		<input class="form-control upload-file" type="file"(change)="onChange($event)">
+		<img src="../../assets/images/attachment.jpg" alt="Upload file" />
+	</span>
+
 	<button (click)="onUpload()" mat-raised-button disabled="{{uploadDisabled}}"> Upload </button>
 </div>
 
-<button mat-raised-button (click)="openDialog()">Open dialog</button>
+<!-- <button mat-raised-button (click)="openDialog()">Open dialog</button> -->
 
 <!-- Shareable short link of uploaded file -->
 <div class="container text-center jumbotron" *ngIf="shortLink">

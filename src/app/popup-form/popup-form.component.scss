@@ -5,10 +5,14 @@ p.individual-data {
     display: flex;
 }
 #clipboard {
-    width: 50%;
+    width: 75%;
     margin: 0 auto;
 }
 .individual-line {
     border-bottom: 1px solid #000;
     padding: 10px 0;
+}
+.mdc-dialog__content.modal-width-500 {
+    min-width: 500px !important;
+    overflow-x: hidden !important;
 }

@@ -1,8 +1,8 @@
 <form class="example-container" *ngIf="!messageGenerated" [formGroup]="swiftForm" (ngSubmit)="onSubmit()">
-  <mat-dialog-content class="mat-typography">
+  <mat-dialog-content class="mat-typography modal-width-500">
     <p>Please check the below parsed values and if you want to update something, you can do so and then press on "Generate SM586 Message" button.</p>
   </mat-dialog-content>
-  
+
   <mat-grid-list cols="2" rowHeight="8:1">
     <mat-grid-tile *ngFor="let swift of swiftFormatObject | keyvalue;">
       <mat-form-field>
@@ -23,7 +23,7 @@
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
-  
+
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button color="primary" (click)="onSubmit()">Generate SM586 Message</button>
@@ -31,9 +31,9 @@
 </form>
 
 <div *ngIf="messageGenerated">
-  <h2 mat-dialog-title>Install Angular</h2>
-  <mat-dialog-content class="mat-typography">
-    <h3>Develop across all platforms</h3>
+  <h2 mat-dialog-title>Parsed Swift Message - MT586</h2>
+  <mat-dialog-content class="mat-typography modal-width-500">
+    <h3>Parsed PDF/email to swift message MT586 is a below. </h3>
     <ng-content></ng-content>
     <div id="clipboard">
       <div class="individual-line">SWIFT MT586 Message</div>
@@ -44,6 +44,9 @@
       <div class="individual-line">:23G:NEWM/ONLY</div>
       <div class="individual-line">:98A:STAT//20221127</div>
       <div class="individual-line">:22F:CODE//DELT</div>
+      <div class="individual-line">:16S:GENL</div>
+      <div class="individual-line">Sequence B</div>
+      <div class="individual-line">:16R:ALLDET</div>
       <div class="individual-line" *ngIf="swiftForm.value.trade !== ''">:98A::TRAD//{{swiftForm.value.trade}}</div>
       <div class="individual-line" *ngIf="swiftForm.value.settlement !== ''">:98A::SETT//{{swiftForm.value.settlement}}</div>
       <div class="individual-line" *ngIf="swiftForm.value.isin !== ''">:35B:ISIN {{swiftForm.value.isin}}</div>
@@ -51,6 +54,7 @@
       <div class="individual-line" *ngIf="swiftForm.value.dtc !== ''">:97A::SAFE//{{swiftForm.value.dtc}}</div>
       <div class="individual-line" *ngIf="swiftForm.value.bic !== ''">:95P::SELL//{{swiftForm.value.bic}}</div>
       <div class="individual-line" *ngIf="swiftForm.value.container_key !== ''">:97A::SAFE//{{swiftForm.value.container_key}}</div>
+      <div class="individual-line">:16S:ALLDET</div>
 
       <!-- <div class="individual-line" *ngIf="swiftForm.value.currency !== ''">{{swiftForm.value.currency}}</div>
       <div class="individual-line" *ngIf="swiftForm.value.internalRef !== ''">{{swiftForm.value.internalRef}}</div>

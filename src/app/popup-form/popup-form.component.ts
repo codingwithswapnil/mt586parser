@@ -87,7 +87,7 @@ export class PopupFormComponent implements OnInit {
   };
 
   swiftForm: any;
-  
+
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: FormDataInterface,) { }
 
   ngOnInit(): void {
@@ -121,6 +121,9 @@ export class PopupFormComponent implements OnInit {
     message += `:23G:NEWM/ONLY\n`;
     message += `:98A:STAT//20221127\n`;
     message += `:22F:CODE//DELT\n`;
+    message += `:16S:GENL\n`;
+    message += `Sequence B\n`;
+    message += `:16R:ALLDET\n`;
     if (this.swiftForm.value.trade !== '') message += `:98A::TRAD//${this.swiftForm.value.trade}\n`;
     if (this.swiftForm.value.settlement !== '') message += `:98A::SETT//${this.swiftForm.value.settlement}\n`;
     if (this.swiftForm.value.isin !== '') message += `:35B:ISIN ${this.swiftForm.value.isin}\n`;
@@ -128,6 +131,7 @@ export class PopupFormComponent implements OnInit {
     if (this.swiftForm.value.dtc !== '') message += `:97A::SAFE//${this.swiftForm.value.dtc}\n`;
     if (this.swiftForm.value.bic !== '') message += `:95P::SELL//${this.swiftForm.value.bic}\n`;
     if (this.swiftForm.value.container_key !== '') message += `:97A::SAFE//${this.swiftForm.value.container_key}\n`;
+    message += `:16S:ALLDET\n`;
 
     // if (this.swiftForm.value.currency !== '') message += `${this.swiftForm.value.currency}\n`;
     // if (this.swiftForm.value.internalRef !== '') message += `${this.swiftForm.value.internalRef}\n`;

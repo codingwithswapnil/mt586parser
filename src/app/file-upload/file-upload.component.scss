@@ -1,0 +1,26 @@
+.upload-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .upload-file-wrapper {
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        padding: 5px 10px;
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+        .upload-file {
+            cursor: pointer;
+            height: 100%;
+            position: absolute;
+            filter: alpha(opacity=1);
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    }
+}
