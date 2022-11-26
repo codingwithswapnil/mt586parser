@@ -1,0 +1,65 @@
+<form class="example-container" *ngIf="!messageGenerated" [formGroup]="swiftForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <p>Please check the below parsed values and if you want to update something, you can do so and then press on "Generate SM586 Message" button.</p>
+  </mat-dialog-content>
+  
+  <mat-grid-list cols="2" rowHeight="8:1">
+    <mat-grid-tile *ngFor="let swift of swiftFormatObject | keyvalue;">
+      <mat-form-field>
+        <mat-label>{{swift.value.label}}</mat-label>
+        <input *ngIf="swift.value.type !== 'select'" matInput [id]="swift.value.id" [type]="swift.value.type" class="form-field" [formControlName]="swift.value.id">
+
+        <ng-container *ngIf="swift.value.type === 'select'">
+          <mat-select *ngIf="swift.value.id === 'currency'" [formControlName]="swift.value.id" [(value)]="swiftForm.value.currency">
+            <mat-option *ngFor="let currency of currencies;" [value]="currency">{{currency}}</mat-option>
+          </mat-select>
+          <mat-select *ngIf="swift.value.id === 'isin'" [formControlName]="swift.value.id" [(value)]="swiftForm.value.isin">
+            <mat-option *ngFor="let currency of isin;" [value]="currency">{{currency}}</mat-option>
+          </mat-select>
+          <mat-select *ngIf="swift.value.id === 'quantity'" [formControlName]="swift.value.id" [(value)]="swiftForm.value.quantity">
+            <mat-option *ngFor="let currency of quantities;" [value]="currency">{{currency}}</mat-option>
+          </mat-select>
+        </ng-container>
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" (click)="onSubmit()">Generate SM586 Message</button>
+  </mat-dialog-actions>
+</form>
+
+<div *ngIf="messageGenerated">
+  <h2 mat-dialog-title>Install Angular</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>Develop across all platforms</h3>
+    <ng-content></ng-content>
+    <div id="clipboard">
+      <div class="individual-line">SWIFT MT586 Message</div>
+      <div class="individual-line">Sequence A</div>
+      <div class="individual-line">:16R:GENL</div>
+      <div class="individual-line">:28E:00001/ONLY</div>
+      <div class="individual-line" *ngIf="swiftForm.value.externalRef !== ''">:20C::SEME//{{swiftForm.value.externalRef}}</div>
+      <div class="individual-line">:23G:NEWM/ONLY</div>
+      <div class="individual-line">:98A:STAT//20221127</div>
+      <div class="individual-line">:22F:CODE//DELT</div>
+      <div class="individual-line" *ngIf="swiftForm.value.trade !== ''">:98A::TRAD//{{swiftForm.value.trade}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.settlement !== ''">:98A::SETT//{{swiftForm.value.settlement}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.isin !== ''">:35B:ISIN {{swiftForm.value.isin}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.quantity !== ''">:36B::SETT//UNIT//{{swiftForm.value.quantity}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.dtc !== ''">:97A::SAFE//{{swiftForm.value.dtc}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.bic !== ''">:95P::SELL//{{swiftForm.value.bic}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.container_key !== ''">:97A::SAFE//{{swiftForm.value.container_key}}</div>
+
+      <!-- <div class="individual-line" *ngIf="swiftForm.value.currency !== ''">{{swiftForm.value.currency}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.internalRef !== ''">{{swiftForm.value.internalRef}}</div>
+      <div class="individual-line" *ngIf="swiftForm.value.bu !== ''">{{swiftForm.value.bu}}</div> -->
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="warn" (click)="gotoForm()">Go back</button>
+    <button mat-button color="primary" [cdkCopyToClipboard]="parsedMessage" [mat-dialog-close]="true" cdkFocusInitial>Copy to clipboard</button>
+  </mat-dialog-actions>
+</div>
