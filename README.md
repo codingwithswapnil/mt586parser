@@ -1,4 +1,4 @@
-# Parser
+# MD586Parser
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Changes required
+
+Check file named fine-upload.service.ts to get the upload file functionlity with call to the parsing mechanism service.
+Remove line number 33 to 43 from file named file-upload,.component.ts. That data will be from parsed service and we can set it into subsciption of the service in same file in function onUpload.
+Popup functionlity is coded into popup-form component.
